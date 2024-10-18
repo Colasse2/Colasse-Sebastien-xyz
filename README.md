@@ -1,4 +1,4 @@
-# XYZ
+# XYZ Colasse Sébastien
 
 <img src="docs/screenshots/home.png" alt="Page d'accueil" />
 
