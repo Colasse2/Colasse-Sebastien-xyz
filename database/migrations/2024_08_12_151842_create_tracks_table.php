@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('player')->nullable();
             $table->string('player_track_id')->nullable();
             $table->string('player_thumbnail_url')->nullable();
+            $table->string('id_category')->nullable();
             $table->string('category')->nullable();
             $table->timestamps();
         });

@@ -28,4 +28,24 @@ class Category extends Model
             (object) ['id' => 9, 'name' => 'Electro'],
         ];
     }
+
+    public function getId()
+    {
+        $categories = self::getCategories();
+        $randomCategory = $categories[array_rand($categories)];
+        return $randomCategory->id;
+    }
+
+    public function getName($id)
+    {
+        $categories = self::getCategories();
+        foreach ($categories as $category) {
+            if ($category->id == $id) {
+                return $category->name;
+            }
+        }
+        return null;
+    }
+
+
 }

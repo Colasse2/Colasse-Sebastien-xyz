@@ -22,6 +22,11 @@ class TrackFactory extends Factory
         // Between yesterday and ~6 previous weeks
         $published_at = now()->subDays(rand(1, 80));
 
+        // Get a random category
+        $categoryModel = new \App\Models\Category();
+        $id_category = $categoryModel->getId();
+        $category = $categoryModel->getName($id_category);
+
         return [
             'user_id' => User::factory(),
             'week_id' => Week::factory(),
@@ -30,7 +35,8 @@ class TrackFactory extends Factory
             'url' => fake()->randomElement(['https://youtube.com/watch?v=ID', 'https://soundcloud/USER/TRACK']),
             'created_at' => $published_at,
             'updated_at' => $published_at,
-            'category' => fake()->randomElement(['Soul', 'Ambient', 'Pop', 'Rap', 'Funk', 'Rock', 'Reggae / Dub', 'Techno', 'Electro']),
+            'id_category' => $id_category,
+            'category' => $category,
         ];
     }
 
