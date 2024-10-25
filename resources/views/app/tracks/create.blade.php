@@ -47,6 +47,7 @@
                 @error('category_id')
                 <p class="error-message">{{ $message }}</p>
                 @enderror
+
                 <div class="submit">
                     @csrf
                     <button type="submit" class="primary">Envoyer</button>

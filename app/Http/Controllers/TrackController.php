@@ -50,15 +50,21 @@ class TrackController extends Controller
     {
         $this->authorize('create', Track::class);
 
+        // Get category IDs and names
+        $categories = Category::getCategories();
+        $categoryIds = array_map(fn($category) => $category->id, $categories);
+        $categoryNames = array_column($categories, 'name', 'id'); // Creates an array of category names keyed by their IDs
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'artist' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', new PlayerUrl()],
+            'category_id' => ['required', 'integer', 'in:' . implode(',', $categoryIds)],
         ]);
 
         DB::beginTransaction();
 
-        // Set track title, artist and url
+        // Set track title, artist, url, and category_id
         $track = new Track($validated);
 
         // Set track's user + week
@@ -69,10 +75,13 @@ class TrackController extends Controller
             // Fetch track detail from provider (YT, SC)
             $details = $player->details($track->url);
 
-            // Set player_id, track_id and thumbnail_url
+            // Set player_id, track_id, and thumbnail_url
             $track->player = $details->player_id;
             $track->player_track_id = $details->track_id;
             $track->player_thumbnail_url = $details->thumbnail_url;
+
+            // Set category name
+            $track->category = $categoryNames[$validated['category_id']] ?? null;
 
             // Publish track
             $track->save();
@@ -88,6 +97,7 @@ class TrackController extends Controller
             'track' => $track,
         ]);
     }
+
 
     /**
      * Toggle like.
