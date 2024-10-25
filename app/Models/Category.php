@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -47,5 +48,8 @@ class Category extends Model
         return null;
     }
 
-
+    public function getAllCategories(): HasMany
+    {
+        return $this->hasMany(Track::class, 'id_category');
+    }
 }

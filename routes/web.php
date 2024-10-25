@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WeekController;
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/weeks/{week:uri}', [WeekController::class, 'show'])->name('app.weeks.show')->where('week', '[0-9]{4}/[0-9]{2}');
     Route::get('/weeks/{week:uri}/tracks/{track}', [TrackController::class, 'show'])->name('app.tracks.show')->where('week', '[0-9]{4}/[0-9]{2}');
     Route::post('/weeks/{week:uri}/tracks/{track}/like', [TrackController::class, 'like'])->name('app.tracks.like')->where('week', '[0-9]{4}/[0-9]{2}');
+
+    //Category
+    Route::get('/categories/*', [CategoryController::class, 'index'])->name('app.categories.index');
 
     // Track
     Route::get('/tracks/create', [TrackController::class, 'create'])->name('app.tracks.create');

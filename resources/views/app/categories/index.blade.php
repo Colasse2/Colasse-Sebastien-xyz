@@ -4,18 +4,16 @@
             <h1>Toutes les catégories</h1>
 
             <div class="grid">
-                @foreach($categories as $category)
-                    <a href="{{ route('app.categories.show', ['category' => $category->id]) }}" class="block image">
-                        <div class="description">
-                            <div>
-                                {{--  --}}
-                            </div>
-                            <div>
-                                <h2>{{ $category->name }}</h2>
-                                <h3>{{ trans_choice('tracks.count', $category->tracks_count) }}</h3>
-                            </div>
+                @foreach($category as $tracks)
+                    <div class="description">
+                        <div>
+                            {{--  --}}
                         </div>
-                    </a>
+                        <div>
+                            <h2>{{ $tracks->name }}</h2>
+                            <h3>{{ trans_choice('tracks.count', $tracks->tracks_count) }}</h3>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </section>
