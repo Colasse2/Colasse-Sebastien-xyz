@@ -1,4 +1,4 @@
-# XYZ Colasse Sébastien
+# XYZ Colasse Sébastien G8
 
 <img src="docs/screenshots/home.png" alt="Page d'accueil" />
 
